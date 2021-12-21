@@ -40,7 +40,7 @@ STOP_DECODING = '[STOP]' # This has a vocab id, which is used at the end of untr
 class Vocab(object):
   """Vocabulary class for mapping between words and ids (integers)"""
 
-  def __init__(self, vocab_file, max_size):
+  def __init__(self, vocab_file, max_size, lda_path, dict_path):
     """Creates a vocab of up to max_size words, reading from the vocab_file. If max_size is 0, reads the entire vocab file.
 
     Args:
@@ -78,7 +78,7 @@ class Vocab(object):
     print("Finished constructing vocabulary of %i total words. Last word added: %s" % (self._count, self._id_to_word[self._count-1]))
 
     """The topic model is initialized here"""
-    self.tm = TopicModel()
+    self.tm = TopicModel(modelAdd=lda_path, dictAdd=dict_path)
 
 
 

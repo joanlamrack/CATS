@@ -36,6 +36,8 @@ tf.compat.v1.disable_eager_execution()
 # Where to find data
 tf.compat.v1.app.flags.DEFINE_string('data_path', '', 'Path expression to tf.Example datafiles. Can include wildcards to access multiple datafiles.')
 tf.compat.v1.app.flags.DEFINE_string('vocab_path', '', 'Path expression to text vocabulary file.')
+tf.compat.v1.app.flags.DEFINE_string('lda_path', '', 'LDA path')
+tf.compat.v1.app.flags.DEFINE_string('dict_path', '', 'Dictionary Path')
 
 # Important settings
 tf.compat.v1.app.flags.DEFINE_string('mode', 'train', 'must be one of train/eval/decode')
@@ -283,7 +285,7 @@ def main(unused_argv):
     else:
       raise Exception("Logdir %s doesn't exist. Run in train mode to create it." % (FLAGS.log_root))
 
-  vocab = Vocab(FLAGS.vocab_path, FLAGS.vocab_size) # create a vocabulary
+  vocab = Vocab(FLAGS.vocab_path, FLAGS.vocab_size, FLAGS.lda_path, FLAGS.dict_path) # create a vocabulary
 
   # If in decode mode, set batch_size = beam_size
   # Reason: in decode mode, we decode one example at a time.
